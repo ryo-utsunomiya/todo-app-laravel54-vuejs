@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->text('content');
-            $table->boolean('checked');
+            $table->boolean('checked')->default(false);
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')
