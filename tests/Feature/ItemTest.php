@@ -26,6 +26,18 @@ class ItemTest extends TestCase
         $this->assertCount(1, $response->json());
     }
 
+    public function testIndexReturnsOnlyUncheckedItems()
+    {
+        $item = Item::query()->find(1);
+        $item->checked = 1;
+        $item->save();
+
+        $response = $this->get('/api/items');
+
+        $response->assertStatus(200);
+        $this->assertCount(0, $response->json());
+    }
+
     public function testShow()
     {
         $response = $this->get('/api/items/1');
@@ -48,7 +60,7 @@ class ItemTest extends TestCase
     {
         $data = ['content' => 'ブログを書く'];
         $response = $this->patch('/api/items/1', $data);
-        
+
         $response->assertStatus(200);
         $response->assertJson($data);
         $item = Item::query()->find(1);

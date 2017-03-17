@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return response(Item::all());
+        return response(Item::query()->where('checked', false)->get());
     }
 
     /**
@@ -74,6 +74,6 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         $item->delete();
-        return response('{}'); // 返すものがないので空のJSONを返す
+        return response()->json(); // 返すものがないので空のJSONを返す
     }
 }
