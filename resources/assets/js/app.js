@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -13,9 +12,11 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-Vue.component('hello', require('./components/Hello.vue'));
+const App = require('./components/App.vue');
+const store = require('./store/').default;
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store,
+    render: h => h(App)
 });
